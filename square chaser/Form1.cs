@@ -31,6 +31,7 @@ namespace square_chaser
         SolidBrush white = new SolidBrush(Color.White);
         SolidBrush yellow = new SolidBrush(Color.Yellow);
         SolidBrush red = new SolidBrush(Color.Red);
+        SolidBrush Blue = new SolidBrush(Color.Blue);
         // this checks to see what direction you are moving 
         bool wPressed = false;
         bool sPressed = false;
@@ -42,8 +43,8 @@ namespace square_chaser
         bool rightPressed = false;
         bool active = true;
         // this is the speed and the score
-        int playerSpeed = 20;
-        int player2Speed = 20;
+        int playerSpeed = 10;
+        int player2Speed = 10;
         int playerScore = 0;
         int player2Score = 0;
         int powerUp = 0;
@@ -223,8 +224,8 @@ namespace square_chaser
             // this checks if you intersect with the white point squares 
             if (player1.IntersectsWith(square))
             {
-                int random = randGen.Next(1, 521);
-                int random2 = randGen.Next(1, 501);
+                int random = randGen.Next(25, 521);
+                int random2 = randGen.Next(25, 501);
                 square = new Rectangle(random, random2, 15, 15);
                 Horn.Play();
                 playerScore++;
@@ -259,7 +260,7 @@ namespace square_chaser
             // this checks if you hit the yellow speed circle and checks that you don't have swap
             if (player1.IntersectsWith(speed) && player1Condtion == "")
             {
-                playerSpeed = 30;
+                playerSpeed = 20;
                 speed = new Rectangle(900, 900, 10, 10);
                 Speed.Play();
                 timer2.Enabled = true;
@@ -267,7 +268,7 @@ namespace square_chaser
             // this checks if you hit the yellow speed circle and checks that you don't have swap
             if (player2.IntersectsWith(speed) && player2Condtion == "")
             {
-                player2Speed = 30;
+                player2Speed = 20;
                 speed = new Rectangle(900, 900, 10, 10);
                 Speed.Play();
                 timer2.Enabled = true;
@@ -276,7 +277,7 @@ namespace square_chaser
             if (player1.IntersectsWith(Swap))
             {
                 player1Condtion = "Swap";
-                playerSpeed = 50;
+                playerSpeed = 30;
                 timer2.Enabled=true;
                 Switch.Play();
                 Swap = new Rectangle(900, 900, 60, 60);
@@ -285,7 +286,7 @@ namespace square_chaser
             if (player2.IntersectsWith(Swap))
             {
                 player2Condtion = "Swap";
-                player2Speed = 50;
+                player2Speed = 30;
                 timer2.Enabled = true;
                 Switch.Play();
                 Swap = new Rectangle(900, 900, 60, 60);
@@ -331,8 +332,8 @@ namespace square_chaser
                 {
                     // this paints all the rectangles and circles 
                     e.Graphics.FillEllipse(white, square);
-                    e.Graphics.FillRectangle(white, player1);
-                    e.Graphics.FillRectangle(white, player2);
+                    e.Graphics.FillRectangle(red, player1);
+                    e.Graphics.FillRectangle(Blue, player2);
                     e.Graphics.FillEllipse(yellow, speed);
                     e.Graphics.FillEllipse(red, Swap);
                     e.Graphics.DrawRectangle(blue, 24, 24, 545, 490);
@@ -356,10 +357,10 @@ namespace square_chaser
                     { // this gives you back normal controls and moves swap to a new location
                         player1Condtion = "";
                         powerUp = 0;
-                        int random = randGen.Next(1, 521);
-                        int random2 = randGen.Next(1, 501);
+                        int random = randGen.Next(25, 521);
+                        int random2 = randGen.Next(25, 501);
                         Swap = new Rectangle(random, random2, 60, 60);
-                        playerSpeed = 20;
+                        playerSpeed = 10;
                         timer2.Enabled = false;
                         
                     }
@@ -368,10 +369,10 @@ namespace square_chaser
                         // this gives you back normal controls and moves swap to a new location
                         player2Condtion = "";
                         powerUp = 0;
-                        int random = randGen.Next(1, 521);
-                        int random2 = randGen.Next(1, 501);
+                        int random = randGen.Next(25, 521);
+                        int random2 = randGen.Next(25, 501);
                         Swap = new Rectangle(random, random2, 60, 60);
-                        player2Speed = 20;
+                        player2Speed = 10;
                         timer2.Enabled = false;
                     }
                 }
@@ -382,16 +383,16 @@ namespace square_chaser
                     if (playerSpeed == 30)
                     {
                         // this sets your speed boost to normal
-                        playerSpeed = 20;
+                        playerSpeed = 10;
                     }
                     else
                     {
-                        player2Speed = 20;
+                        player2Speed = 10;
                     }
                     // this moves speed boost to a new spot 
                     powerUp = 0;
-                    int random = randGen.Next(1, 521);
-                    int random2 = randGen.Next(1, 501);
+                    int random = randGen.Next(25, 521);
+                    int random2 = randGen.Next(25, 501);
                     speed = new Rectangle(random, random2, 10, 10);
                     timer2.Enabled = false;
                 }
